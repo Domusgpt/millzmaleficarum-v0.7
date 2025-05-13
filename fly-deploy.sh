@@ -10,6 +10,9 @@ NC='\033[0m' # No Color
 # Set path to flyctl
 FLYCTL="/home/millz/.fly/bin/flyctl"
 
+# Set Fly.io API token
+export FLY_API_TOKEN="FlyV1 fm2_lJPECAAAAAAACLYkxBCj1TTVilFslaKI/zYgJOFSwrVodHRwczovL2FwaS5mbHkuaW8vdjGUAJLOABBmbx8Lk7lodHRwczovL2FwaS5mbHkuaW8vYWFhL3YxxDyD226xJ9OzN53dnWjrWm9F2PnQK/IgyIdfPjC4JLer4WrW4NSHI8YiQS5M8pL2c65TPPOeMvuA0iSvriTETngASn8MsBW/P6y2FwpPYp0sK8PoVmXXX9IhNCQEvSXoI4CPm1Yh90AsgOHHMl0nA1UBmf8y0RVzIwNn0b8YT2mlirBmdvZSkfz7NmUKe8QgkuZhmOPA5A9AI6jAiLyODzaM8vpwRBrrx7XlpGftshQ=,fm2_lJPETngASn8MsBW/P6y2FwpPYp0sK8PoVmXXX9IhNCQEvSXoI4CPm1Yh90AsgOHHMl0nA1UBmf8y0RVzIwNn0b8YT2mlirBmdvZSkfz7NmUKe8QQz332zAU0nMUneZ6TwYUJRsO5aHR0cHM6Ly9hcGkuZmx5LmlvL2FhYS92MZgEks5oI4gizwAAAAEkG6ZAF84AD8QgCpHOAA/EIAzEEEM5giSLZBL7kM/cNblOiiXEILnIRS0sfgZh+mCEuFgCTirtMxUCkT2iYx8VOvxo7TfS"
+
 echo -e "${YELLOW}======================================${NC}"
 echo -e "${YELLOW}    MillzMaleficarum Fly.io Deploy    ${NC}"
 echo -e "${YELLOW}======================================${NC}"
@@ -21,15 +24,9 @@ if [ ! -f "$FLYCTL" ]; then
   exit 1
 fi
 
-# Check if user is logged in
-echo -e "${YELLOW}Checking Fly.io authentication...${NC}"
-if ! $FLYCTL auth whoami &> /dev/null; then
-  echo -e "${YELLOW}You need to login to Fly.io${NC}"
-  echo -e "Please open this URL in your browser to log in: https://fly.io/app/auth/cli"
-  $FLYCTL auth login
-else
-  echo -e "${GREEN}Already logged in to Fly.io.${NC}"
-fi
+# Using API token for authentication
+echo -e "${YELLOW}Using Fly.io API token for authentication...${NC}"
+echo -e "${GREEN}API token configured.${NC}"
 
 # Run git status to check for uncommitted changes
 echo -e "${YELLOW}Checking git status...${NC}"
@@ -62,7 +59,8 @@ fi
 # Launch/deploy app
 if [ "$APP_EXISTS" = false ]; then
   echo -e "${YELLOW}Creating new app on Fly.io...${NC}"
-  $FLYCTL launch --no-deploy --copy-config --name "$APP_NAME"
+  $FLYCTL apps create "$APP_NAME" --org personal
+  echo -e "${GREEN}App '$APP_NAME' created.${NC}"
 fi
 
 # Deploy the app
