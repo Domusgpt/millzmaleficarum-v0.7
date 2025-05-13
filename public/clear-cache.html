@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cache Cleaner - GEN-R-L MiLLz Manifesto</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .cache-cleaner {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.8);
+            border: 1px solid var(--accent1);
+            box-shadow: 0 0 15px var(--accent2);
+        }
+        .button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            background-color: var(--accent1);
+            color: var(--background);
+            border: none;
+            font-family: 'Space Mono', monospace;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .button:hover {
+            background-color: var(--accent2);
+            transform: scale(1.02);
+        }
+        .status {
+            margin: 20px 0;
+            padding: 10px;
+            border-left: 3px solid var(--accent1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 class="title">GEN-R-L MiLLz Cache Cleaner</h1>
+            <p>Purge the dimensional void</p>
+        </header>
+
+        <div class="cache-cleaner">
+            <h2>Cache Reset Utility</h2>
+            <p>Use this tool to force reset cache and retrieve the latest content from the server if you are experiencing issues with content not updating.</p>
+            
+            <div class="status" id="status">Status: Ready</div>
+            
+            <button class="button" id="clearCacheBtn">Clear Browser Cache</button>
+            <button class="button" id="refreshDataBtn">Refresh Magazine Data</button>
+            <button class="button" id="checkServerBtn">Check Server Status</button>
+            <button class="button" id="returnBtn">Return to Magazine</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const statusEl = document.getElementById('status');
+            const clearCacheBtn = document.getElementById('clearCacheBtn');
+            const refreshDataBtn = document.getElementById('refreshDataBtn');
+            const checkServerBtn = document.getElementById('checkServerBtn');
+            const returnBtn = document.getElementById('returnBtn');
+            
+            // Clear browser cache
+            clearCacheBtn.addEventListener('click', async () => {
+                statusEl.textContent = 'Status: Clearing browser cache...';
+                
+                try {
+                    // Clear fetch cache
+                    if ('caches' in window) {
+                        const cacheNames = await caches.keys();
+                        for (const cacheName of cacheNames) {
+                            await caches.delete(cacheName);
+                        }
+                    }
+                    
+                    // Clear local storage
+                    localStorage.clear();
+                    
+                    // Clear session storage
+                    sessionStorage.clear();
+                    
+                    statusEl.textContent = 'Status: Browser cache cleared successfully!';
+                } catch (error) {
+                    statusEl.textContent = `Status: Error clearing cache: ${error.message}`;
+                }
+            });
+            
+            // Refresh data
+            refreshDataBtn.addEventListener('click', async () => {
+                statusEl.textContent = 'Status: Refreshing magazine data...';
+                
+                try {
+                    // Create timestamp for cache busting
+                    const timestamp = new Date().getTime();
+                    const url = `/api/magazine-data?format=rich&t=${timestamp}`;
+                    
+                    const response = await fetch(url, {
+                        method: 'GET',
+                        headers: {
+                            'Cache-Control': 'no-cache, no-store, must-revalidate',
+                            'Pragma': 'no-cache',
+                            'Expires': '0'
+                        },
+                        cache: 'no-store'
+                    });
+                    
+                    if (!response.ok) {
+                        throw new Error(`Server responded with status: ${response.status}`);
+                    }
+                    
+                    const data = await response.json();
+                    
+                    statusEl.textContent = `Status: Successfully loaded issue #${data.issue_number} from ${data.date}`;
+                } catch (error) {
+                    statusEl.textContent = `Status: Error refreshing data: ${error.message}`;
+                }
+            });
+            
+            // Check server status
+            checkServerBtn.addEventListener('click', async () => {
+                statusEl.textContent = 'Status: Checking server status...';
+                
+                try {
+                    const timestamp = new Date().getTime();
+                    const response = await fetch(`/api/magazine-data?t=${timestamp}`, {
+                        method: 'HEAD',
+                        cache: 'no-store'
+                    });
+                    
+                    if (response.ok) {
+                        statusEl.textContent = `Status: Server is online and responding (${response.status})`;
+                    } else {
+                        statusEl.textContent = `Status: Server responded with status: ${response.status} ${response.statusText}`;
+                    }
+                } catch (error) {
+                    statusEl.textContent = `Status: Server error: ${error.message}`;
+                }
+            });
+            
+            // Return to magazine
+            returnBtn.addEventListener('click', () => {
+                window.location.href = '/';
+            });
+        });
+    </script>
+</body>
+</html>

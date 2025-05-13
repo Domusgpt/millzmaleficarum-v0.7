@@ -1,0 +1,49 @@
+{
+  "name": "millzmaleficarum_codex_v0.6",
+  "version": "0.6.0-dev",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
+  "keywords": [
+    "magazine",
+    "digital",
+    "vaporwave",
+    "node",
+    "express"
+  ],
+  "author": "GEN-R-L MiLLz",
+  "license": "ISC",
+  "description": "An immersive, hyperdimensional digital magazine with portal-like transitions, snap-scroll navigation, and integrated 4D visualizations",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "multer": "^1.4.5-lts.2",
+    "serverless-http": "^3.2.0"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.27.2",
+    "babel-jest": "^29.7.0",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "jest": {
+    "testEnvironment": "jsdom",
+    "moduleFileExtensions": [
+      "js",
+      "json"
+    ],
+    "transform": {
+      "^.+\\.js$": "babel-jest"
+    },
+    "moduleNameMapper": {
+      "^/js/modules/(.*)$": "<rootDir>/public/js/modules/$1"
+    }
+  }
+}

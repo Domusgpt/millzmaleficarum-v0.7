@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HyperAV Demo - MillzMaleficarum Codex</title>
+    <style>
+        body {
+            background-color: #0D0033;
+            color: #e6e6e6;
+            font-family: "Courier New", monospace;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        h1, h2, h3 {
+            color: #FF33CC;
+            text-shadow: 0 0 10px rgba(255, 51, 204, 0.5);
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .demo-section {
+            margin: 40px 0;
+            padding: 20px;
+            background-color: rgba(0, 0, 30, 0.4);
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(51, 255, 255, 0.2);
+        }
+        
+        .demo-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        button {
+            background-color: rgba(51, 255, 255, 0.2);
+            color: #33FFFF;
+            border: 1px solid #33FFFF;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-family: "Courier New", monospace;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        button:hover {
+            background-color: rgba(255, 51, 204, 0.2);
+            color: #FF33CC;
+            border-color: #FF33CC;
+            box-shadow: 0 0 10px rgba(255, 51, 204, 0.5);
+        }
+        
+        .sigil-demo {
+            margin: 20px 0;
+            padding: 20px;
+            background-color: rgba(0, 0, 40, 0.5);
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .sigil-xi, .sigil-omega {
+            display: inline-block;
+            margin: 0 10px;
+            font-size: 32px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .sigil-xi {
+            color: #FF33CC;
+            text-shadow: 0 0 10px rgba(255, 51, 204, 0.7);
+        }
+        
+        .sigil-omega {
+            color: #33FFFF;
+            text-shadow: 0 0 10px rgba(51, 255, 255, 0.7);
+        }
+        
+        .sigil-xi:hover, .sigil-omega:hover {
+            transform: scale(1.2);
+        }
+        
+        #hyperav-container {
+            width: 100%;
+            height: 300px;
+            margin: 20px 0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .note {
+            font-size: 0.8em;
+            color: #FF33CC;
+            margin-top: 40px;
+            text-align: center;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>HyperAV Visualization Demo</h1>
+        <p>This demo showcases the 4D audio-reactive visualization system integrated with the MillzMaleficarum Codex.</p>
+        
+        <div class="demo-section">
+            <h2>Main Visualization</h2>
+            <div id="hyperav-container" class="hyperav-container"></div>
+            
+            <div class="demo-controls">
+                <button onclick="HyperAV.toggleSoundReactivity()">Toggle Audio Reactivity</button>
+                <button onclick="HyperAV.toggleVisualizerSize()">Toggle Size</button>
+                <button onclick="HyperAV.updateColorScheme('vaporwave')">Vaporwave Theme</button>
+                <button onclick="HyperAV.updateColorScheme('quantum')">Quantum Theme</button>
+                <button onclick="HyperAV.updateColorScheme('cyber')">Cyber Theme</button>
+            </div>
+        </div>
+        
+        <div class="demo-section">
+            <h2>Sigil Interactions</h2>
+            <p>Click on the sigils below to trigger special visualization effects:</p>
+            
+            <div class="sigil-demo">
+                <span id="demo-sigil-xi" class="sigil-xi">Ξ</span>
+                <span id="demo-sigil-omega" class="sigil-omega">Ω</span>
+            </div>
+            
+            <h3>Usage in Magazine Content</h3>
+            <p>In the magazine, these sigils can be embedded in content like this:</p>
+            <pre>Welcome to the latest issue of the MillzMaleficarum Codex &lt;sigil-Ξ&gt;</pre>
+            <pre>The quantum field reveals multidimensional patterns &lt;sigil-Ω&gt;</pre>
+        </div>
+        
+        <div class="note">
+            <p>Return to the <a href="/" style="color: #33FFFF;">magazine</a> to see the full integration.</p>
+            <p>Created for MillzMaleficarum Codex v1.0</p>
+        </div>
+    </div>
+    
+    <!-- HyperAV Core Dependencies -->
+    <script src="/hyperav/core/GeometryManager.js"></script>
+    <script src="/hyperav/core/ShaderManager.js"></script>
+    <script src="/hyperav/core/HypercubeCore.js"></script>
+    <script src="/hyperav/core/ProjectionManager.js"></script>
+    
+    <!-- HyperAV Integration -->
+    <script type="module" src="/hyperav/magazine-integration.js"></script>
+    
+    <script>
+        // Initialize HyperAV on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            // Add click handlers for demo sigils
+            document.getElementById('demo-sigil-xi').addEventListener('click', function() {
+                this.style.transform = 'scale(1.2)';
+                
+                // Apply dimensional gateway effect
+                window.hyperav.visualizer.updateParameters({
+                    geometryType: 'hypersphere',
+                    projectionMethod: 'stereographic',
+                    rotationSpeed: 0.35,
+                    patternIntensity: 1.0,
+                    glitchIntensity: 0.2
+                });
+                
+                // Reset after delay
+                setTimeout(() => {
+                    this.style.transform = '';
+                    window.hyperav.visualizer.updateParameters({
+                        geometryType: 'hypercube',
+                        projectionMethod: 'perspective',
+                        rotationSpeed: 0.15,
+                        patternIntensity: 0.8,
+                        glitchIntensity: 0.0
+                    });
+                }, 5000);
+            });
+            
+            document.getElementById('demo-sigil-omega').addEventListener('click', function() {
+                this.style.transform = 'scale(1.2)';
+                
+                // Apply hypercube effect
+                window.hyperav.visualizer.updateParameters({
+                    geometryType: 'hypercube',
+                    projectionMethod: 'perspective',
+                    rotationSpeed: 0.4,
+                    patternIntensity: 0.7
+                });
+                
+                // Reset after delay
+                setTimeout(() => {
+                    this.style.transform = '';
+                    window.hyperav.visualizer.updateParameters({
+                        geometryType: 'hypercube',
+                        projectionMethod: 'perspective',
+                        rotationSpeed: 0.15,
+                        patternIntensity: 0.8
+                    });
+                }, 5000);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MillzMaleficarum ES6 Module Test</title>
+  <style>
+    :root {
+      --accent-color: #00ffcc;
+      --text-color: #ffffff;
+      --background-color: #111;
+      --mono-font: 'Courier New', Courier, monospace;
+    }
+    
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: var(--mono-font);
+      background-color: var(--background-color);
+      color: var(--text-color);
+      overflow: hidden;
+      height: 100vh;
+    }
+    
+    #hyperav-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: -1;
+    }
+    
+    #magazine-content {
+      height: 100vh;
+      overflow-y: scroll;
+      scroll-snap-type: y mandatory;
+      perspective: 1000px;
+    }
+    
+    section {
+      height: 100vh;
+      scroll-snap-align: start;
+      padding: 2rem;
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+    
+    h2 {
+      color: var(--accent-color);
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    
+    p {
+      max-width: 800px;
+      line-height: 1.6;
+      margin: 0 auto 1rem;
+      font-size: 1.2rem;
+    }
+    
+    .test-controls {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: rgba(0, 0, 0, 0.7);
+      border: 1px solid var(--accent-color);
+      border-radius: 5px;
+      padding: 15px;
+      z-index: 1000;
+    }
+    
+    .test-controls button {
+      background: transparent;
+      border: 1px solid var(--accent-color);
+      color: var(--accent-color);
+      margin: 5px;
+      padding: 5px 10px;
+      border-radius: 3px;
+      cursor: pointer;
+      font-family: var(--mono-font);
+    }
+    
+    .test-controls button:hover {
+      background: rgba(0, 255, 204, 0.1);
+    }
+  </style>
+</head>
+<body>
+  <div id="hyperav-background"></div>
+  
+  <div id="magazine-content">
+    <section id="cover" class="cover-section">
+      <h2>MillzMaleficarum ES6 Module Test</h2>
+      <p>This page tests the ES6 module implementations of the MillzMaleficarum Codex components. Scroll to navigate between sections and experience the portal transitions.</p>
+    </section>
+    
+    <section id="editorial" class="editorial-section">
+      <h2>Portal Transitions</h2>
+      <p>The portal transitions module creates hyperdimensional portal effects when navigating between sections. It simulates the appearance of tearing through spacetime to reveal different sections of the magazine.</p>
+    </section>
+    
+    <section id="culture" class="culture-section">
+      <h2>HyperAV Visualization</h2>
+      <p>The HyperAV module provides a lightweight implementation of higher-dimensional visualization as a background effect for the magazine interface. It renders 4D objects projected into 3D and then onto the 2D screen.</p>
+    </section>
+    
+    <section id="tech" class="tech-section">
+      <h2>Audio Reactivity</h2>
+      <p>The HyperAVAudio module connects audio analysis to visual elements for a synchronized audio-visual experience. It analyzes audio frequencies and maps them to visual parameters in the HyperAV visualization.</p>
+    </section>
+    
+    <section id="interview" class="interview-section">
+      <h2>ES6 Module Architecture</h2>
+      <p>This implementation uses modern ES6 modules with proper imports/exports, enhancing code organization and maintainability. The modular architecture makes it easier to test components individually and extend functionality.</p>
+    </section>
+  </div>
+  
+  <div class="test-controls">
+    <button id="test-hyperav">Test HyperAV</button>
+    <button id="test-portal">Test Portal</button>
+    <button id="test-audio">Test Audio</button>
+    <button id="generate-sound">Generate Sound</button>
+  </div>
+  
+  <script type="module">
+    // Import the main system loader
+    import { initMillzMaleficarum } from '/js/modules/loader.js';
+    
+    // Initialize the system
+    const system = initMillzMaleficarum({
+      hyperAV: {
+        pattern: 'tesseract',
+        color1: '#00e6ff',
+        color2: '#ff2a6d',
+        speed: 0.04,
+        opacity: 0.4
+      },
+      audio: {
+        autoplayOnInteraction: true,
+        ambientMode: true,
+        visualFeedback: true,
+        enableMicrophoneInput: true,
+        reactivityIntensity: 0.7
+      },
+      portal: {
+        useHyperAV: true,
+        enableAudio: true,
+        portalIntensity: 0.8,
+        transitionDuration: 1500
+      }
+    });
+    
+    // Add event listeners for test buttons
+    document.getElementById('test-hyperav').addEventListener('click', () => {
+      // Modify HyperAV visualization
+      const patterns = ['tesseract', 'hypertetrahedra', 'tesseract_fold'];
+      const pattern = patterns[Math.floor(Math.random() * patterns.length)];
+      
+      system.hyperAV.updateOptions({
+        pattern,
+        speed: Math.random() * 0.1 + 0.02,
+        opacity: Math.random() * 0.6 + 0.3,
+        color1: `hsl(${Math.floor(Math.random() * 360)}, 80%, 60%)`,
+        color2: `hsl(${Math.floor(Math.random() * 360)}, 80%, 60%)`
+      });
+      
+      console.log('Updated HyperAV with pattern:', pattern);
+    });
+    
+    document.getElementById('test-portal').addEventListener('click', () => {
+      // Trigger a manual portal transition
+      const sections = ['cover', 'editorial', 'culture', 'tech', 'interview'];
+      const randomSection = sections[Math.floor(Math.random() * sections.length)];
+      
+      system.portalTransitions.transitionToSection(randomSection);
+      console.log('Triggered transition to section:', randomSection);
+    });
+    
+    document.getElementById('test-audio').addEventListener('click', () => {
+      // Toggle audio playback
+      if (system.hyperAVAudio.state.isPlaying) {
+        system.hyperAVAudio.pause();
+        console.log('Paused audio');
+      } else {
+        system.hyperAVAudio.play();
+        console.log('Started audio');
+      }
+    });
+    
+    document.getElementById('generate-sound').addEventListener('click', () => {
+      // Generate synthetic audio
+      const patterns = ['quantum_pulse', 'void_hum', 'dimensional_rift', 'ambient_drone'];
+      const pattern = patterns[Math.floor(Math.random() * patterns.length)];
+      
+      system.hyperAVAudio.generateSyntheticAudio(pattern, 30)
+        .then(() => {
+          system.hyperAVAudio.play();
+          console.log('Generated and playing sound pattern:', pattern);
+        });
+    });
+    
+    console.log('Test page initialized with MillzMaleficarum Codex v0.6 ES6 modules');
+  </script>
+</body>
+</html>

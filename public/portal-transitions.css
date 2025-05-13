@@ -1,0 +1,516 @@
+/*
+ * Portal Transitions CSS for MillzMaleficarum Codex v0.6
+ * ULTRA-ENHANCED dimensional portal effects with extreme holographic parallax
+ * Featuring laser neon aesthetics and immersive 3D scrolling
+ */
+
+/* Make sure the root container is set up for 3D transforms */
+html, body {
+  perspective: 1800px;
+  transform-style: preserve-3d;
+}
+
+/* Container with 3D perspective for portal transitions */
+#magazine-content {
+  width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scroll-snap-type: y mandatory;
+  height: 100vh;
+  perspective: 1500px;
+  transform-style: preserve-3d;
+  scroll-behavior: smooth;
+}
+
+/* Portal section base styles with enhanced 3D effects */
+.portal-section {
+  scroll-snap-align: start;
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  transform-style: preserve-3d;
+  transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1),
+              border-radius 0.5s ease,
+              box-shadow 0.7s ease,
+              background-color 0.8s ease,
+              filter 0.7s ease;
+  padding: 4rem 2rem 2rem 2rem;
+  box-sizing: border-box;
+  background-color: rgba(0, 0, 60, 0.4);
+  backface-visibility: hidden;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+  filter: brightness(1) contrast(1);
+}
+
+/* Section-specific portal styling (extends existing style.css) */
+#cover.portal-section {
+  background-color: rgba(0, 0, 70, 0.4);
+}
+
+#editorial.portal-section {
+  background-color: rgba(0, 5, 60, 0.4);
+}
+
+#culture.portal-section {
+  background-color: rgba(15, 0, 60, 0.4);
+}
+
+#tech.portal-section {
+  background-color: rgba(0, 15, 60, 0.4);
+}
+
+#interview.portal-section {
+  background-color: rgba(5, 0, 65, 0.4);
+}
+
+#ads.portal-section {
+  background-color: rgba(10, 0, 50, 0.4);
+}
+
+#lore.portal-section {
+  background-color: rgba(20, 0, 60, 0.4);
+}
+
+/* Ensure section content remains above portal effects */
+.portal-section > * {
+  position: relative;
+  z-index: 5;
+}
+
+/* Portal border effects */
+.portal-border {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 1;
+  box-shadow: inset 0 0 30px rgba(0, 255, 255, 0.5);
+  border: 1px solid var(--accent2);
+  transition: box-shadow 0.8s ease, 
+              border 0.8s ease, 
+              border-radius 0.8s ease;
+}
+
+/* Section corner ornaments */
+.portal-corner {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border: 2px solid var(--accent3);
+  pointer-events: none;
+  z-index: 2;
+  transition: all 0.5s ease;
+}
+
+/* Corner positioning */
+.portal-corner.top-left {
+  top: 10px;
+  left: 10px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.portal-corner.top-right {
+  top: 10px;
+  right: 10px;
+  border-left: none;
+  border-bottom: none;
+}
+
+.portal-corner.bottom-left {
+  bottom: 10px;
+  left: 10px;
+  border-right: none;
+  border-top: none;
+}
+
+.portal-corner.bottom-right {
+  bottom: 10px;
+  right: 10px;
+  border-left: none;
+  border-top: none;
+}
+
+/* Portal overlay styling */
+.portal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.portal-canvas,
+.portal-4d-canvas {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
+
+/* Enhanced section transition animations */
+.portal-section.exit-to-back {
+  animation: exitToBack 1.5s ease-in-out;
+}
+
+.portal-section.exit-to-front {
+  animation: exitToFront 1.5s ease-in-out;
+}
+
+.portal-section.portal-exit {
+  animation: portal-exit 1.5s ease-in-out;
+  z-index: 10;
+  filter: brightness(1.2) contrast(1.1);
+}
+
+.portal-section.portal-enter {
+  animation: portal-enter 1.5s ease-in-out;
+  z-index: 5;
+}
+
+.reality-distortion-active {
+  animation: reality-distortion 1.5s ease-in-out;
+}
+
+@keyframes exitToBack {
+  0% { transform: scale(1) translateZ(0) rotateX(0deg); filter: brightness(100%); }
+  20% { transform: scale(0.95) translateZ(-50px) rotateX(5deg); filter: brightness(90%); }
+  50% { transform: scale(0.9) translateZ(-150px) rotateX(10deg); filter: brightness(80%) blur(2px); }
+  80% { transform: scale(0.95) translateZ(-50px) rotateX(5deg); filter: brightness(90%); }
+  100% { transform: scale(1) translateZ(0) rotateX(0deg); filter: brightness(100%); }
+}
+
+@keyframes exitToFront {
+  0% { transform: scale(1) translateZ(0) rotateX(0deg); filter: brightness(100%); }
+  20% { transform: scale(1.05) translateZ(50px) rotateX(-5deg); filter: brightness(110%); }
+  50% { transform: scale(1.1) translateZ(150px) rotateX(-10deg); filter: brightness(120%) saturate(110%); }
+  80% { transform: scale(1.05) translateZ(50px) rotateX(-5deg); filter: brightness(110%); }
+  100% { transform: scale(1) translateZ(0) rotateX(0deg); filter: brightness(100%); }
+}
+
+/* More extreme portal exit animation */
+@keyframes portal-exit {
+  0% {
+    transform: scale(1) rotate(0deg) translateZ(0);
+    filter: brightness(100%) contrast(100%) blur(0px);
+  }
+  20% {
+    transform: scale(1.1) rotate(1deg) translateZ(50px);
+    filter: brightness(130%) contrast(110%) saturate(120%);
+  }
+  50% {
+    transform: scale(1.2) rotate(2deg) translateZ(100px);
+    filter: brightness(150%) contrast(120%) saturate(140%) hue-rotate(15deg);
+  }
+  80% {
+    transform: scale(0.9) rotate(-1deg) translateZ(-30px);
+    filter: brightness(70%) contrast(90%) blur(3px);
+  }
+  100% {
+    transform: scale(1) rotate(0deg) translateZ(0);
+    filter: brightness(100%) contrast(100%) blur(0px);
+  }
+}
+
+/* More extreme portal enter animation */
+@keyframes portal-enter {
+  0% {
+    transform: scale(0.9) rotate(0deg) translateZ(-50px);
+    filter: brightness(70%) contrast(90%) blur(5px) hue-rotate(-15deg);
+  }
+  30% {
+    transform: scale(0.95) rotate(-1deg) translateZ(-20px);
+    filter: brightness(90%) contrast(95%) blur(3px);
+  }
+  60% {
+    transform: scale(1.15) rotate(2deg) translateZ(70px);
+    filter: brightness(140%) contrast(120%) saturate(130%) blur(1px);
+  }
+  80% {
+    transform: scale(1.05) rotate(1deg) translateZ(30px);
+    filter: brightness(120%) contrast(110%) saturate(110%);
+  }
+  100% {
+    transform: scale(1) rotate(0deg) translateZ(0);
+    filter: brightness(100%) contrast(100%);
+  }
+}
+
+/* Reality distortion for entire page */
+@keyframes reality-distortion {
+  0% { filter: none; }
+  20% { filter: hue-rotate(15deg) saturate(120%); }
+  50% { filter: hue-rotate(30deg) saturate(150%) brightness(120%); }
+  80% { filter: hue-rotate(15deg) saturate(130%); }
+  100% { filter: none; }
+}
+
+/* Portal border animations */
+@keyframes portalBorderPulse {
+  0% { box-shadow: inset 0 0 30px var(--accent2); opacity: 0.7; }
+  25% { box-shadow: inset 0 0 40px var(--accent2); opacity: 0.8; }
+  50% { box-shadow: inset 0 0 60px var(--accent2); opacity: 0.9; }
+  75% { box-shadow: inset 0 0 40px var(--accent2); opacity: 0.8; }
+  100% { box-shadow: inset 0 0 30px var(--accent2); opacity: 0.7; }
+}
+
+@keyframes portalWarp {
+  0% { transform: scale(1) rotate(0deg) translateZ(0px); filter: hue-rotate(0deg); }
+  25% { transform: scale(1.05) rotate(1deg) translateZ(10px); filter: hue-rotate(15deg); }
+  50% { transform: scale(1.1) rotate(2deg) translateZ(20px); filter: hue-rotate(30deg); }
+  75% { transform: scale(1.05) rotate(-1deg) translateZ(10px); filter: hue-rotate(15deg); }
+  100% { transform: scale(1) rotate(0deg) translateZ(0px); filter: hue-rotate(0deg); }
+}
+
+@keyframes cornerPulse {
+  0% { width: 40px; height: 40px; border-width: 2px; box-shadow: 0 0 5px var(--accent2); }
+  50% { width: 50px; height: 50px; border-width: 3px; box-shadow: 0 0 15px var(--accent2); }
+  100% { width: 40px; height: 40px; border-width: 2px; box-shadow: 0 0 5px var(--accent2); }
+}
+
+/* Text distortion during portal transitions */
+.reality-distortion-active h1,
+.reality-distortion-active h2,
+.reality-distortion-active h3 {
+  animation: text-distortion 1.5s ease-in-out;
+}
+
+@keyframes text-distortion {
+  0% { text-shadow: 0 0 0 rgba(0,0,0,0); }
+  25% { text-shadow:
+    -2px -2px 0 var(--accent2, #00eeff),
+    2px 2px 0 var(--accent1, #ff00aa);
+  }
+  50% { text-shadow:
+    3px 0 0 var(--accent2, #00eeff),
+    -3px 0 0 var(--accent1, #ff00aa);
+  }
+  75% { text-shadow:
+    -3px 3px 0 var(--accent2, #00eeff),
+    3px -3px 0 var(--accent1, #ff00aa);
+  }
+  100% { text-shadow: 0 0 0 rgba(0,0,0,0); }
+}
+
+/* Image glitch effect during transitions */
+.reality-distortion-active img {
+  animation: image-glitch 1.5s ease-in-out;
+}
+
+@keyframes image-glitch {
+  0% {
+    filter: none;
+    transform: translateX(0);
+  }
+  20% {
+    filter: hue-rotate(90deg) saturate(200%);
+    transform: translateX(5px);
+  }
+  40% {
+    filter: hue-rotate(-90deg) saturate(200%) brightness(150%);
+    transform: translateX(-5px) translateY(3px);
+  }
+  60% {
+    filter: hue-rotate(45deg) saturate(300%) contrast(150%);
+    transform: translateX(7px) translateY(-3px) scale(1.03);
+  }
+  80% {
+    filter: hue-rotate(-45deg) saturate(200%);
+    transform: translateX(-3px) translateY(-2px);
+  }
+  100% {
+    filter: none;
+    transform: translateX(0);
+  }
+}
+
+/* Enhanced sigil animation */
+.sigil-Xi, .sigil-Theta, .sigil-Gamma, .sigil-Pi, .sigil-Lambda,
+.sigil-Sigma, .sigil-Phi, .sigil-Psi, .sigil-Omega, .sigil-Delta {
+  display: inline-block;
+  animation: sigil-pulse 4s infinite alternate ease-in-out;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  color: var(--accent2, #00eeff);
+  font-weight: bold;
+  position: relative;
+}
+
+@keyframes sigil-pulse {
+  0% {
+    transform: scale(1) rotate(0deg) translateZ(0px);
+    filter: brightness(100%) drop-shadow(0 0 5px rgba(0, 230, 255, 0.7));
+  }
+  50% {
+    transform: scale(1.1) rotate(5deg) translateZ(10px);
+    filter: brightness(130%) drop-shadow(0 0 15px rgba(0, 230, 255, 0.9));
+  }
+  100% {
+    transform: scale(1) rotate(-2deg) translateZ(0px);
+    filter: brightness(100%) drop-shadow(0 0 5px rgba(0, 230, 255, 0.7));
+  }
+}
+
+/* Depth layer effects for 3D structure */
+.depth-layer-1 {
+  transform: translateZ(75px);
+  z-index: 10;
+}
+
+.depth-layer-2 {
+  transform: translateZ(25px);
+  z-index: 5;
+}
+
+.depth-layer-3 {
+  transform: translateZ(-25px) scale(1.05);
+  filter: blur(1px);
+  opacity: 0.9;
+  z-index: 3;
+}
+
+.depth-layer-4 {
+  transform: translateZ(-75px) scale(1.1);
+  filter: blur(2px);
+  opacity: 0.7;
+  z-index: 1;
+}
+
+/* Section hover effects */
+.portal-section:hover .portal-border {
+  box-shadow: inset 0 0 50px var(--accent2);
+  animation: portalBorderPulse 3s infinite ease-in-out;
+}
+
+.portal-section:hover .portal-corner {
+  animation: cornerPulse 3s infinite ease-in-out;
+}
+
+/* Section-specific portal border styling */
+#cover .portal-border {
+  box-shadow: inset 0 0 30px rgba(255, 0, 170, 0.5);
+  border-color: var(--accent1);
+}
+
+#editorial .portal-border {
+  box-shadow: inset 0 0 30px rgba(0, 238, 255, 0.5);
+  border-color: var(--accent2);
+}
+
+#culture .portal-border {
+  box-shadow: inset 0 0 30px rgba(204, 0, 255, 0.5);
+  border-color: var(--accent4);
+}
+
+#tech .portal-border {
+  box-shadow: inset 0 0 30px rgba(0, 255, 204, 0.5);
+  border-color: var(--accent2);
+}
+
+#interview .portal-border {
+  box-shadow: inset 0 0 30px rgba(255, 204, 0, 0.5);
+  border-color: var(--accent3);
+}
+
+#ads .portal-border {
+  box-shadow: inset 0 0 30px rgba(255, 51, 204, 0.5);
+  border-color: var(--accent1);
+}
+
+#lore .portal-border {
+  box-shadow: inset 0 0 30px rgba(138, 43, 226, 0.5);
+  border-color: var(--accent4);
+}
+
+/* Navigation controls styling */
+.portal-nav-controls {
+  position: fixed;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 900;
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+}
+
+.portal-nav-controls:hover {
+  opacity: 1;
+}
+
+.portal-nav-button {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.portal-nav-button:hover {
+  transform: scale(1.2);
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+.portal-nav-button.active {
+  background: var(--accent1);
+  border-color: white;
+  box-shadow: 0 0 10px var(--accent1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .portal-section {
+    padding: 3rem 1rem 1rem 1rem;
+  }
+  
+  .portal-corner {
+    width: 30px;
+    height: 30px;
+  }
+  
+  @keyframes cornerPulse {
+    0% { width: 30px; height: 30px; border-width: 2px; }
+    50% { width: 40px; height: 40px; border-width: 3px; }
+    100% { width: 30px; height: 30px; border-width: 2px; }
+  }
+}
+
+@media (max-width: 480px) {
+  .portal-section {
+    padding: 2rem 0.8rem 0.8rem 0.8rem;
+  }
+  
+  .portal-corner {
+    width: 20px;
+    height: 20px;
+  }
+  
+  @keyframes cornerPulse {
+    0% { width: 20px; height: 20px; border-width: 1px; }
+    50% { width: 25px; height: 25px; border-width: 2px; }
+    100% { width: 20px; height: 20px; border-width: 1px; }
+  }
+  
+  .portal-nav-controls {
+    right: 10px;
+  }
+  
+  .portal-nav-button {
+    width: 10px;
+    height: 10px;
+  }
+}

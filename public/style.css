@@ -1,0 +1,377 @@
+/* MillzMaleficarum Codex v0.5 */
+/* Vaporwave/Cryptic/Sacred Tech Theme with HyperAV Integration */
+
+:root {
+  --primary: #ff00ff;
+  --secondary: #00ffff;
+  --background: #000033;
+  --text: #ffffff;
+  --accent1: #ff00aa;
+  --accent2: #00eeff;
+  --grid: #ff00ff22;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'VT323', monospace;
+  background-color: var(--background);
+  background-image: 
+    linear-gradient(rgba(0, 0, 51, 0.9), rgba(0, 0, 51, 0.9)),
+    url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ff00ff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  color: var(--text);
+  line-height: 1.6;
+  position: relative;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    linear-gradient(0deg, transparent 95%, rgba(255, 0, 255, 0.03) 100%),
+    linear-gradient(90deg, transparent 95%, rgba(0, 255, 255, 0.03) 100%);
+  background-size: 20px 20px;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding: 2rem;
+  border: 2px solid var(--secondary);
+  box-shadow: 0 0 20px var(--primary);
+  background: rgba(0, 0, 60, 0.5);
+  position: relative;
+}
+
+header::before,
+header::after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--accent1);
+}
+
+header::before {
+  top: -2px;
+  left: -2px;
+  border-right: none;
+  border-bottom: none;
+}
+
+header::after {
+  bottom: -2px;
+  right: -2px;
+  border-left: none;
+  border-top: none;
+}
+
+.title {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  color: var(--primary);
+  text-shadow: 
+    0 0 10px var(--primary),
+    3px 3px 0 var(--accent2);
+  letter-spacing: 2px;
+}
+
+.issue {
+  font-size: 1.2rem;
+  color: var(--secondary);
+  text-transform: lowercase;
+  letter-spacing: 5px;
+}
+
+main {
+  flex: 1;
+  margin-bottom: 3rem;
+}
+
+.section {
+  margin-bottom: 3rem;
+  padding: 2rem;
+  background: rgba(0, 0, 60, 0.3);
+  border-left: 3px solid var(--accent1);
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.section:hover {
+  background: rgba(0, 0, 60, 0.5);
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.3);
+  transform: translateY(-5px);
+}
+
+.section-title {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: var(--accent2);
+  text-shadow: 0 0 8px var(--accent2);
+}
+
+.section-content {
+  font-size: 1.2rem;
+  line-height: 1.6;
+}
+
+/* Section styles */
+.centered {
+  text-align: center;
+}
+
+.glitched {
+  position: relative;
+  animation: glitch 2s infinite;
+}
+
+@keyframes glitch {
+  0% { text-shadow: 3px 0 0 red, -3px 0 0 blue; }
+  1% { text-shadow: 3px 0 0 red, -3px 0 0 blue; }
+  2% { text-shadow: 3px 0 0 red, -3px 0 0 blue; }
+  3% { text-shadow: 3px 0 0 red, -3px 0 0 blue; }
+  4% { text-shadow: 3px 0 0 red, -3px 0 0 blue; }
+  5% { text-shadow: -3px 0 0 red, 3px 0 0 blue; }
+  6% { text-shadow: -3px 0 0 red, 3px 0 0 blue; }
+  7% { text-shadow: -3px 0 0 red, 3px 0 0 blue; }
+  8% { text-shadow: -3px 0 0 red, 3px 0 0 blue; }
+  9% { text-shadow: -3px 0 0 red, 3px 0 0 blue; }
+  10% { text-shadow: -3px 0 0 red, 3px 0 0 blue; }
+  11% { text-shadow: 1px 0 0 red, -1px 0 0 lime; }
+  12% { text-shadow: 1px 0 0 red, -1px 0 0 lime; }
+  13% { text-shadow: 1px 0 0 red, -1px 0 0 lime; }
+  14% { text-shadow: 1px 0 0 red, -1px 0 0 lime; }
+  15% { text-shadow: 1px 0 0 red, -1px 0 0 lime; }
+  16% { text-shadow: -1px 0 0 red, 1px 0 0 lime; }
+  17% { text-shadow: -1px 0 0 red, 1px 0 0 lime; }
+  18% { text-shadow: -1px 0 0 red, 1px 0 0 lime; }
+  19% { text-shadow: -1px 0 0 red, 1px 0 0 lime; }
+  20% { text-shadow: -1px 0 0 red, 1px 0 0 lime; }
+  21% { text-shadow: 0.5px 0 0 red, -0.5px 0 0 blue; }
+  22% { text-shadow: 0.5px 0 0 red, -0.5px 0 0 blue; }
+  23% { text-shadow: 0.5px 0 0 red, -0.5px 0 0 blue; }
+  24% { text-shadow: 0.5px 0 0 red, -0.5px 0 0 blue; }
+  25% { text-shadow: 0.5px 0 0 red, -0.5px 0 0 blue; }
+  26% { text-shadow: 0.5px 0 0 red, -0.5px 0 0 blue; }
+  27% { text-shadow: 0.5px 0 0 red, -0.5px 0 0 blue; }
+  28% { text-shadow: 0.5px 0 0 red, -0.5px 0 0 blue; }
+  29% { text-shadow: 0.5px 0 0 red, -0.5px 0 0 blue; }
+  30% { text-shadow: 0.5px 0 0 red, -0.5px 0 0 blue; }
+  31% { text-shadow: -1px 0 0 red, 1px 0 0 lime; }
+  32% { text-shadow: -1px 0 0 red, 1px 0 0 lime; }
+  33% { text-shadow: -1px 0 0 red, 1px 0 0 lime; }
+  34% { text-shadow: -1px 0 0 red, 1px 0 0 lime; }
+  35% { text-shadow: -1px 0 0 red, 1px 0 0 lime; }
+  36% { text-shadow: -1px 0 0 red, 1px 0 0 lime; }
+  37% { text-shadow: -1px 0 0 red, 1px 0 0 lime; }
+  38% { text-shadow: -1px 0 0 red, 1px 0 0 lime; }
+  39% { text-shadow: -1px 0 0 red, 1px 0 0 lime; }
+  40% { text-shadow: -1px 0 0 red, 1px 0 0 lime; }
+  41% { text-shadow: 50px 0 0 red, -50px 0 0 lime; }
+  42% { text-shadow: 0 0 0 red, 0 0 0 lime; }
+  43% { text-shadow: 0.5px 0 0 red, -0.5px 0 0 lime; }
+  44% { text-shadow: 0.5px 0 0 red, -0.5px 0 0 lime; }
+  45% { text-shadow: 0.5px 0 0 red, -0.5px 0 0 lime; }
+  46% { text-shadow: 0.5px 0 0 red, -0.5px 0 0 lime; }
+  47% { text-shadow: -1px 0 0 red, 1px 0 0 lime; }
+  48% { text-shadow: -1px 0 0 red, 1px 0 0 lime; }
+  49% { text-shadow: -1px 0 0 red, 1px 0 0 lime; }
+  50% { text-shadow: -1px 0 0 red, 1px 0 0 lime; }
+  51% { text-shadow: 1px 0 0 red, -1px 0 0 blue; }
+  52% { text-shadow: 1px 0 0 red, -1px 0 0 blue; }
+  53% { text-shadow: 1px 0 0 red, -1px 0 0 blue; }
+  54% { text-shadow: 1px 0 0 red, -1px 0 0 blue; }
+  55% { text-shadow: 1px 0 0 red, -1px 0 0 blue; }
+  56% { text-shadow: -1px 0 0 red, 1px 0 0 blue; }
+  57% { text-shadow: -1px 0 0 red, 1px 0 0 blue; }
+  58% { text-shadow: -1px 0 0 red, 1px 0 0 blue; }
+  59% { text-shadow: -1px 0 0 red, 1px 0 0 blue; }
+  60% { text-shadow: -1px 0 0 red, 1px 0 0 blue; }
+  61% { text-shadow: 30px 0 0 red, -30px 0 0 lime; }
+  62% { text-shadow: 0 0 0 red, 0 0 0 lime; }
+  63% { text-shadow: 0.5px 0 0 red, -0.5px 0 0 blue; }
+  64% { text-shadow: 0.5px 0 0 red, -0.5px 0 0 blue; }
+  65% { text-shadow: 0.5px 0 0 red, -0.5px 0 0 blue; }
+  66% { text-shadow: 0.5px 0 0 red, -0.5px 0 0 blue; }
+  67% { text-shadow: -1px 0 0 red, 1px 0 0 blue; }
+  68% { text-shadow: -1px 0 0 red, 1px 0 0 blue; }
+  69% { text-shadow: -1px 0 0 red, 1px 0 0 blue; }
+  70% { text-shadow: -1px 0 0 red, 1px 0 0 blue; }
+  71% { text-shadow: 70px 0 0 red, -70px 0 0 blue; }
+  72% { text-shadow: 0 0 0 red, 0 0 0 blue; }
+  73% { text-shadow: 1px 0 0 red, -1px 0 0 blue; }
+  74% { text-shadow: 1px 0 0 red, -1px 0 0 blue; }
+  75% { text-shadow: 1px 0 0 red, -1px 0 0 blue; }
+  76% { text-shadow: 1px 0 0 red, -1px 0 0 blue; }
+  77% { text-shadow: -1px 0 0 red, 1px 0 0 blue; }
+  78% { text-shadow: -1px 0 0 red, 1px 0 0 blue; }
+  79% { text-shadow: -1px 0 0 red, 1px 0 0 blue; }
+  80% { text-shadow: -1px 0 0 red, 1px 0 0 blue; }
+  81% { text-shadow: 0.5px 0 0 red, -0.5px 0 0 lime; }
+  82% { text-shadow: 0.5px 0 0 red, -0.5px 0 0 lime; }
+  83% { text-shadow: 0.5px 0 0 red, -0.5px 0 0 lime; }
+  84% { text-shadow: 0.5px 0 0 red, -0.5px 0 0 lime; }
+  85% { text-shadow: 0.5px 0 0 red, -0.5px 0 0 lime; }
+  86% { text-shadow: -1px 0 0 red, 1px 0 0 lime; }
+  87% { text-shadow: -1px 0 0 red, 1px 0 0 lime; }
+  88% { text-shadow: -1px 0 0 red, 1px 0 0 lime; }
+  89% { text-shadow: -1px 0 0 red, 1px 0 0 lime; }
+  90% { text-shadow: -1px 0 0 red, 1px 0 0 lime; }
+  91% { text-shadow: 60px 0 0 lime, -60px 0 0 blue; }
+  92% { text-shadow: 0 0 0 lime, 0 0 0 blue; }
+  92% { text-shadow: 0.7px 0 0 blue, -0.7px 0 0 lime; }
+  93% { text-shadow: 0.7px 0 0 blue, -0.7px 0 0 lime; }
+  94% { text-shadow: 0.7px 0 0 blue, -0.7px 0 0 lime; }
+  95% { text-shadow: 0.7px 0 0 blue, -0.7px 0 0 lime; }
+  96% { text-shadow: -1px 0 0 blue, 1px 0 0 lime; }
+  97% { text-shadow: -1px 0 0 blue, 1px 0 0 lime; }
+  98% { text-shadow: -1px 0 0 blue, 1px 0 0 lime; }
+  99% { text-shadow: -1px 0 0 blue, 1px 0 0 lime; }
+  100% { text-shadow: -1px 0 0 blue, 1px 0 0 lime; }
+}
+
+footer {
+  padding: 1rem;
+  text-align: center;
+  background: rgba(0, 0, 60, 0.5);
+  border-top: 1px solid var(--accent1);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+@media (max-width: 768px) {
+  .footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.footer-cell {
+  font-size: 0.9rem;
+  color: var(--accent2);
+}
+
+/* Loading animation */
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+}
+
+.cybr-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.loader {
+  width: 60px;
+  height: 60px;
+  border: 3px solid transparent;
+  border-top-color: var(--primary);
+  border-bottom-color: var(--secondary);
+  border-radius: 50%;
+  animation: spin 2s linear infinite;
+}
+
+.loader:before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  right: 5px;
+  bottom: 5px;
+  border: 3px solid transparent;
+  border-top-color: var(--accent1);
+  border-bottom-color: var(--accent2);
+  border-radius: 50%;
+  animation: spin 3s linear infinite;
+}
+
+.loading-text {
+  margin-top: 1rem;
+  color: var(--secondary);
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+/* HyperAV Container */
+.hyperav-container {
+  width: 100%;
+  height: 250px;
+  margin: 0 auto 2rem;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--accent1);
+  box-shadow: 0 0 20px rgba(255, 0, 255, 0.3);
+  border-radius: 5px;
+  background: rgba(0, 0, 40, 0.4);
+  transition: all 0.3s ease;
+}
+
+.hyperav-container:hover {
+  box-shadow: 0 0 30px rgba(255, 0, 255, 0.5);
+  transform: translateY(-3px);
+}
+
+#hypercube-canvas {
+  width: 100%;
+  height: 100%;
+}
+
+/* Sigil Elements */
+.hyperav-sigil {
+  display: inline-block;
+  margin: 1rem;
+  color: var(--accent2);
+  font-weight: bold;
+  text-shadow: 0 0 5px var(--accent2);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.hyperav-sigil:hover {
+  text-shadow: 0 0 10px var(--accent2);
+  transform: scale(1.1);
+}

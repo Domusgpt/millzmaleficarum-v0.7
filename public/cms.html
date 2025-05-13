@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MillzMaleficarum CMS</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background-color: #111;
+      color: #fff;
+    }
+    
+    #cms-container {
+      min-height: 100vh;
+    }
+    
+    .loading-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+      background-color: #111;
+      color: #00e6ff;
+      font-family: monospace;
+      text-align: center;
+    }
+    
+    .loading-spinner {
+      width: 50px;
+      height: 50px;
+      border: 5px solid rgba(0, 230, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: #00e6ff;
+      animation: spin 1s ease-in-out infinite;
+      margin-bottom: 20px;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <div id="cms-container">
+    <div class="loading-container">
+      <div class="loading-spinner"></div>
+      <h2>Loading MillzMaleficarum CMS...</h2>
+      <p>Initializing content management system</p>
+    </div>
+  </div>
+  
+  <script type="module">
+    // Import CMS module
+    import { initCMS } from '/js/modules/cms/index.js';
+    
+    // Initialize CMS
+    document.addEventListener('DOMContentLoaded', () => {
+      initCMS('cms-container', {
+        storage: {
+          apiEndpoint: '/api/magazine-data',
+          localStorageKey: 'millz_cms_data',
+          enableLocalBackup: true,
+          useRichFormat: true
+        },
+        interface: {
+          showSectionPreview: true,
+          enableRichEditor: true,
+          autoSave: true
+        }
+      });
+    });
+  </script>
+</body>
+</html>
