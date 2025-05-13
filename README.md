@@ -133,4 +133,4 @@ Mobile support is available but with reduced quantum effects due to performance 
 
 ---
 
-*"The collapse of digital possibility waves creates the observer paradox: reality exists because we code it, and code exists because reality demands it." — GEN-R-L MiLLz*
+*"The collapse of digital possibility waves creates the observer paradox: reality exists because we code it, and code exists because reality demands it." — GEN-R-L MiLLz*# millzmaleficarum-v0.7
