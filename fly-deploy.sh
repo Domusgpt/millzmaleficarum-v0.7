@@ -7,22 +7,26 @@ YELLOW='\033[1;33m'
 RED='\033[0;31m'
 NC='\033[0m' # No Color
 
+# Set path to flyctl
+FLYCTL="/home/millz/.fly/bin/flyctl"
+
 echo -e "${YELLOW}======================================${NC}"
 echo -e "${YELLOW}    MillzMaleficarum Fly.io Deploy    ${NC}"
 echo -e "${YELLOW}======================================${NC}"
 
 # Check if Fly CLI is installed
-if ! command -v flyctl &> /dev/null; then
-  echo -e "${RED}Error: Fly CLI (flyctl) is not installed.${NC}"
+if [ ! -f "$FLYCTL" ]; then
+  echo -e "${RED}Error: Fly CLI (flyctl) is not installed at expected path: $FLYCTL${NC}"
   echo -e "Please install it by following the instructions at: https://fly.io/docs/hands-on/install-flyctl/"
   exit 1
 fi
 
 # Check if user is logged in
 echo -e "${YELLOW}Checking Fly.io authentication...${NC}"
-if ! flyctl auth whoami &> /dev/null; then
+if ! $FLYCTL auth whoami &> /dev/null; then
   echo -e "${YELLOW}You need to login to Fly.io${NC}"
-  flyctl auth login
+  echo -e "Please open this URL in your browser to log in: https://fly.io/app/auth/cli"
+  $FLYCTL auth login
 else
   echo -e "${GREEN}Already logged in to Fly.io.${NC}"
 fi
@@ -47,7 +51,7 @@ fi
 # Check if app already exists
 echo -e "${YELLOW}Checking if app already exists on Fly.io...${NC}"
 APP_NAME="millzmaleficarum-v0-6"
-if flyctl apps list | grep -q "$APP_NAME"; then
+if $FLYCTL apps list | grep -q "$APP_NAME"; then
   echo -e "${GREEN}App '$APP_NAME' already exists.${NC}"
   APP_EXISTS=true
 else
@@ -58,17 +62,17 @@ fi
 # Launch/deploy app
 if [ "$APP_EXISTS" = false ]; then
   echo -e "${YELLOW}Creating new app on Fly.io...${NC}"
-  flyctl launch --no-deploy --copy-config --name "$APP_NAME"
+  $FLYCTL launch --no-deploy --copy-config --name "$APP_NAME"
 fi
 
 # Deploy the app
 echo -e "${YELLOW}Deploying app to Fly.io...${NC}"
-flyctl deploy
+$FLYCTL deploy
 
 # Output success message
 echo -e "${GREEN}======================================${NC}"
 echo -e "${GREEN}    Deployment Complete!              ${NC}"
 echo -e "${GREEN}======================================${NC}"
 echo -e "Your app is now deployed at: https://$APP_NAME.fly.dev"
-echo -e "You can check its status with: flyctl status -a $APP_NAME"
-echo -e "And view logs with: flyctl logs -a $APP_NAME"
+echo -e "You can check its status with: $FLYCTL status -a $APP_NAME"
+echo -e "And view logs with: $FLYCTL logs -a $APP_NAME"
