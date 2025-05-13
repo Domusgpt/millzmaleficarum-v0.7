@@ -42,6 +42,15 @@ This version radically transforms the visual experience with multiple breakthrou
 - Secret key combinations that trigger special modes
 - Hidden messages and easter eggs
 
+## ES6 Module Architecture
+
+The v0.6 version has been completely refactored with modern ES6 modules for better maintainability and performance:
+
+- **Portal Transitions**: `/js/modules/portal/` - Hyperdimensional portal effects
+- **HyperAV Engine**: `/js/modules/hyperav/` - 4D visualization engine
+- **Audio Reactivity**: `/js/modules/hyperav/audio/` - Sound analysis and reactions
+- **Content Management**: `/js/modules/cms/` - Magazine content management system
+
 ## Core Technologies
 
 - **Quantum Particle Engine**: Reality-fracturing particle system with entanglement physics
@@ -85,6 +94,25 @@ Sigils are scattered throughout the content. Look for special Greek letter symbo
    ./run-local.sh
    ```
 4. Open http://localhost:8080 in your browser (Chrome/Edge recommended for best performance)
+
+### Test Pages
+
+- Main magazine: http://localhost:8080/
+- Module test page: http://localhost:8080/test.html 
+- Integration test: http://localhost:8080/test-integration.html
+- CMS dashboard: http://localhost:8080/cms.html
+
+## Testing
+
+Run the test suite with:
+```
+npm test
+```
+
+The project includes comprehensive tests:
+- Unit tests for all modules
+- Integration tests for system components
+- Import tests for ES6 module structure
 
 ## Browser Compatibility
 
