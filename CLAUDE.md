@@ -3,11 +3,11 @@
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## Project Status
-- **Current Version: 0.6-dev** (Upgraded from v0.5 with extreme visual enhancements)
-- Hyperdimensional magazine with enhanced snap-scroll page transitions
-- Implementing portal-like transitions between sections with 4D visualization effects
-- Advanced integration of HyperAV engine directly into the page structure
-- Headless Claude Code integration for evolving cryptic vaporwave content
+- **Current Version: 0.7-dev** (Upgraded from v0.6 with immersive dimensional worlds)
+- HyperAV visualization expanded to universal environment rather than contained boxes
+- Separate dimensional worlds for each section instead of scroll-based navigation
+- Enhanced text animations with advanced reality distortion effects
+- Hyperdimensional magazine with inter-dimensional travel between content sections
 
 ## Headless Claude Integration
 - The system now uses a headless instance of Claude Code to:
