@@ -598,10 +598,6 @@ class ShaderManager {
         `;
     }
     
-    /**
-     * Universal environment projection for UniversalHyperAV
-     */
-    }
     dispose() { console.log("Disposing ShaderManager..."); if (!this.gl) return; try { this.gl.useProgram(null); } catch(e) {} for (const name in this.programs) { if (this.programs[name]) { const p = this.programs[name]; try { const s = this.gl.getAttachedShaders(p); s?.forEach(sh=>this.gl.detachShader(p,sh)); this.gl.deleteProgram(p); } catch (e) {} } } this.programs={}; for (const name in this.compiledShaders) { if(this.compiledShaders[name]) { try {this.gl.deleteShader(this.compiledShaders[name]);} catch(e){} } } this.compiledShaders={}; this.shaderSources={}; this.uniformLocations={}; this.attributeLocations={}; this.currentProgramName=null; this.geometryManager=null; this.projectionManager=null; console.log("ShaderManager disposed."); }
 }
 // Make ShaderManager globally available

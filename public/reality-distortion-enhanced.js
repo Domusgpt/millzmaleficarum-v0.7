@@ -3,6 +3,8 @@
  * Enhanced reality distortion effects specifically for new dimensional worlds
  */
 
+// Only create the class if it doesn't already exist
+if (!window.RealityDistortionEnhanced) {
 class RealityDistortionEnhanced {
   constructor() {
     this.config = {
@@ -649,8 +651,9 @@ class RealityDistortionEnhanced {
   }
 }
 
-// Create global instance
+// Create global instance 
 document.addEventListener('DOMContentLoaded', () => {
   window.realityDistortionEnhanced = new RealityDistortionEnhanced();
   console.log('Enhanced Reality Distortion: Module loaded');
 });
+} // Close the if block

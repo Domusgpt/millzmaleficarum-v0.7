@@ -322,11 +322,54 @@ class QuantumParticles {
     }, 3000 + Math.random() * 2000); // 3-5 seconds of instability
   }
   
+  // Create lazy audio context that initializes on first user interaction
+  getAudioContext() {
+    if (!this.audioContext) {
+      try {
+        this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        
+        // If context is suspended (due to browser autoplay policy), we'll resume it
+        // on the first user interaction
+        if (this.audioContext.state === 'suspended') {
+          const resumeAudio = () => {
+            this.audioContext.resume();
+            
+            // Remove event listeners once audio is resumed
+            ['mousedown', 'touchstart', 'keydown'].forEach(event => {
+              document.removeEventListener(event, resumeAudio);
+            });
+            
+            console.log('QuantumParticles: AudioContext resumed after user interaction');
+          };
+          
+          // Add event listeners for common user interactions
+          ['mousedown', 'touchstart', 'keydown'].forEach(event => {
+            document.addEventListener(event, resumeAudio);
+          });
+          
+          console.log('QuantumParticles: AudioContext created but suspended - waiting for user interaction');
+        }
+      } catch (e) {
+        console.warn('QuantumParticles: Failed to create AudioContext', e);
+        return null;
+      }
+    }
+    
+    return this.audioContext;
+  }
+  
   createFractureSound() {
+    // Get audio context (may be null if not initialized yet)
+    const audioCtx = this.getAudioContext();
+    if (!audioCtx) return;
+    
+    // Check if context is running
+    if (audioCtx.state !== 'running') {
+      console.log('QuantumParticles: AudioContext not running yet - sound will be enabled after user interaction');
+      return;
+    }
+    
     try {
-      if (!window.AudioContext) return;
-      
-      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
       const oscillator = audioCtx.createOscillator();
       const gainNode = audioCtx.createGain();
       
