@@ -194,19 +194,37 @@ function configureHyperAV() {
   if (!window.millzCodex.features.hyperAV) return;
   
   if (window.universalHyperAV) {
-    // Apply performance settings
-    window.universalHyperAV.setOption('quality', 
-      window.millzCodex.performance.mode === 'high' ? 'high' :
-      window.millzCodex.performance.mode === 'medium' ? 'medium' : 'low'
-    );
+    // Apply performance settings using the correct method name
+    if (typeof window.universalHyperAV.setConfig === 'function') {
+      window.universalHyperAV.setConfig('quality', 
+        window.millzCodex.performance.mode === 'high' ? 'high' :
+        window.millzCodex.performance.mode === 'medium' ? 'medium' : 'low'
+      );
+    } else if (typeof window.universalHyperAV.setOption === 'function') {
+      window.universalHyperAV.setOption('quality', 
+        window.millzCodex.performance.mode === 'high' ? 'high' :
+        window.millzCodex.performance.mode === 'medium' ? 'medium' : 'low'
+      );
+    } else {
+      // Apply configuration directly to config object
+      window.universalHyperAV.config.quality = 
+        window.millzCodex.performance.mode === 'high' ? 'high' :
+        window.millzCodex.performance.mode === 'medium' ? 'medium' : 'low';
+      
+      console.log('UniversalHyperAV quality set directly:', window.universalHyperAV.config.quality);
+    }
     
     // Connect systems for interactivity
     if (window.realityDistortion && window.millzCodex.features.realityDistortion) {
-      window.universalHyperAV.registerExternalSystem('realityDistortion', window.realityDistortion);
+      if (typeof window.universalHyperAV.registerExternalSystem === 'function') {
+        window.universalHyperAV.registerExternalSystem('realityDistortion', window.realityDistortion);
+      }
     }
     
     if (window.quantumParticles && window.millzCodex.features.quantumParticles) {
-      window.universalHyperAV.registerExternalSystem('quantumParticles', window.quantumParticles);
+      if (typeof window.universalHyperAV.registerExternalSystem === 'function') {
+        window.universalHyperAV.registerExternalSystem('quantumParticles', window.quantumParticles);
+      }
     }
     
     if (window.millzCodex.debug) {

@@ -180,18 +180,18 @@ class UniversalHyperAV {
     const sm = this.state.shaderManager;
     if (!sm) return;
     
-    // Register vertex shaders for different geometries
-    sm.registerVertexShader('hypercube', `
+    // Register vertex shaders for different geometries using the correct method
+    sm._registerShaderSource('hypercube', `
       attribute vec4 a_position;
       varying vec2 v_texCoord;
       void main() {
         gl_Position = a_position;
         v_texCoord = a_position.xy * 0.5 + 0.5;
       }
-    `);
+    `, sm.gl.VERTEX_SHADER);
     
     // Register fragment shaders for different environments
-    sm.registerFragmentShader('universal_environment', `
+    sm._registerShaderSource('universal_environment', `
       precision highp float;
       varying vec2 v_texCoord;
       uniform float u_time;
@@ -368,7 +368,7 @@ class UniversalHyperAV {
         // Output final color
         gl_FragColor = vec4(color, 0.8 * worldEffect + 0.1);
       }
-    `);
+    `, sm.gl.FRAGMENT_SHADER);
   }
 
   /**
